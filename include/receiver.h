@@ -4,7 +4,7 @@
 #include <stdbool.h>
 #include "uart.h"
 
-void ReceiveSamples(int port_fd);
+int ReceiveSamples(int port_fd);
 
 
 #endif

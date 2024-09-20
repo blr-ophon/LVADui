@@ -2,7 +2,7 @@
 #define CONFIG_H
 
 #define SAMPLE_RATE 3000
-#define DURATION 2
+#define DURATION 1
 
 
 #endif

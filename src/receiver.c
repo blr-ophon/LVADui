@@ -30,12 +30,15 @@ static bool check_delimiter(int buf_pos, int buf_size){
 
 
 
-void ReceiveSamples(int port_fd){
+int ReceiveSamples(int port_fd){
+    int rv = 0;
+
     memset(rx_buf, 0, BUFFER_SIZE);
 
-    bool end_delimiter = false;
-    
     int bytes_read = 0;
+
+    memset(rx_buf, 0, BUFFER_SIZE);
+
     for(;;){
         //read bytes from port;
         bytes_read += read(port_fd, rx_buf + bytes_read, BUFFER_SIZE - bytes_read);
@@ -47,21 +50,18 @@ void ReceiveSamples(int port_fd){
             fprintf(stderr, "RX buffer overflow. No delimiter found\n");
             break;
 
-        }else{
-            end_delimiter = check_delimiter(bytes_read, BUFFER_SIZE - bytes_read);
-
         }
+
+        rv = check_delimiter(bytes_read, BUFFER_SIZE - bytes_read);
     }
 
-    //check delimiter
-    if(end_delimiter){
-        //Plot all of rx from 0 to delimiter
-
-        //Clear buffer
-        memset(rx_buf, 0, BUFFER_SIZE);
-    }
+    return rv;
 }
 
+
+void ConvertSamples(void){
+
+}
 
 
 
